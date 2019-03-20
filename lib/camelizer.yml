@@ -1,0 +1,13 @@
+---
+special_keys:
+  TemplateUrl: TemplateURL
+  Ttl: TTL
+  MaxReceiveCount: maxReceiveCount
+  DeadLetterTargetArn: deadLetterTargetArn
+  DbSubnetGroupDescription: DBSubnetGroupDescription
+  DbSubnetGroupName: DBSubnetGroupName
+  RoleArn: RoleARN
+passthrough_parent_keys:
+- Variables # Lambda Environment Variables https://amzn.to/2HLlttV
+- ResponseParameters # API Gateway MethodResponse https://amzn.to/2HKw0Wk
+- Fn::Sub # https://amzn.to/2HKwxri
