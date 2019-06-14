@@ -9,6 +9,7 @@ special_keys:
   TemplateUrl: TemplateURL
   Ttl: TTL
   VpcZoneIdentifier: VPCZoneIdentifier
+  NotificationTargetArn: NotificationTargetARN
 passthrough_parent_keys:
 - Fn::Sub # https://amzn.to/2HKwxri
 - ResponseParameters # API Gateway MethodResponse https://amzn.to/2HKw0Wk
