@@ -62,4 +62,18 @@ RSpec.describe CfnCamelizer do
     # pp result
     expect(result).to eq("TemplateURL"=>1, "TTL"=> 60)
   end
+
+  it "role_arn property under AWS::Events::Rule type maintains normal RoleArn camelization" do
+    h = {
+      events_rule: {
+        type: "AWS::Events::Rule",
+        properties: {
+          role_arn: "some.arn"
+        }
+      }
+    }
+    result = camelizer.transform(h)
+    # pp result
+    expect(result).to eq({"EventsRule"=>{"Type"=>"AWS::Events::Rule", "Properties"=>{"RoleArn"=>"some.arn"}}})
+  end
 end

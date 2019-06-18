@@ -9,14 +9,18 @@ class CfnCamelizer
   class << self
     extend Memoist
 
-    def transform(value, parent_keys=[])
+    def transform(value, parent_keys=[], resource_type=nil)
       case value
       when Array
-        value.map { |v| transform(v, parent_keys) }
+        value.map { |v| transform(v, parent_keys, resource_type) }
       when Hash
+        if value.keys.include?(:type)
+          resource_type ||= value[:type]
+        end
+
         initializer = value.map do |k, v|
-          new_key = camelize_key(k, parent_keys)
-          [new_key, transform(v, parent_keys+[new_key])]
+          new_key = camelize_key(k, parent_keys, resource_type)
+          [new_key, transform(v, parent_keys+[new_key], resource_type)]
         end
         Hash[initializer]
       else
@@ -24,7 +28,7 @@ class CfnCamelizer
       end
     end
 
-    def camelize_key(k, parent_keys=[])
+    def camelize_key(k, parent_keys=[], resource_type=nil)
       k = k.to_s
 
       if passthrough?(k, parent_keys)
@@ -35,7 +39,7 @@ class CfnCamelizer
         # Any keys at 2nd level under EventPattern will be pascalized
         pascalize(k)
       else
-        camelize(k)
+        camelize(k, resource_type)
       end
     end
 
@@ -46,11 +50,12 @@ class CfnCamelizer
       !intersection.empty? || k.include?('-') || k.include?('/')
     end
 
-    def camelize(value)
+    def camelize(value, resource_type=nil)
       return value if value.is_a?(Integer)
 
       value = value.to_s.camelize
-      special_map[value] || value
+      v = special_map[value] || value # after the special_keys map
+      resource_map(resource_type)[v] || v
     end
 
     def pascalize(value)
@@ -63,6 +68,10 @@ class CfnCamelizer
     # Some keys have special mappings
     def special_map
       camelizer_yaml["special_keys"]
+    end
+
+    def resource_map(resource_type)
+      camelizer_yaml["resource_keys"][resource_type] || {}
     end
 
     def camelizer_yaml

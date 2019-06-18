@@ -10,6 +10,12 @@ special_keys:
   Ttl: TTL
   VpcZoneIdentifier: VPCZoneIdentifier
   NotificationTargetArn: NotificationTargetARN
+# Very fine grain control, since these map rules are scoped to specific resources
+# Occurs after the special_keys map for backwards compatibility.
+# TODO: Rid of most special keys above and replace them with resource_keys rules now that this concept is introduced
+resource_keys: # specific to resource types
+  "AWS::Events::Rule":
+    RoleARN: RoleArn
 passthrough_parent_keys:
 - Fn::Sub # https://amzn.to/2HKwxri
 - ResponseParameters # API Gateway MethodResponse https://amzn.to/2HKw0Wk
