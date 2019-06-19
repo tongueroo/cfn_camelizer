@@ -1,21 +1,24 @@
 ---
 special_keys:
   Aws: AWS
-  DbSubnetGroupDescription: DBSubnetGroupDescription
-  DbSubnetGroupName: DBSubnetGroupName
-  DeadLetterTargetArn: deadLetterTargetArn
-  MaxReceiveCount: maxReceiveCount
-  RoleArn: RoleARN
-  TemplateUrl: TemplateURL
-  Ttl: TTL
-  VpcZoneIdentifier: VPCZoneIdentifier
-  NotificationTargetArn: NotificationTargetARN
 # Very fine grain control, since these map rules are scoped to specific resources
-# Occurs after the special_keys map for backwards compatibility.
-# TODO: Rid of most special keys above and replace them with resource_keys rules now that this concept is introduced
+# After the special_keys map for backwards compatibility.
 resource_keys: # specific to resource types
-  "AWS::Events::Rule":
-    RoleARN: RoleArn
+  AWS::CloudFormation::Stack:
+    TemplateUrl: TemplateURL
+  AWS::AutoScaling::LifecycleHook:
+    RoleArn: RoleARN
+    NotificationTargetArn: NotificationTargetARN
+  AWS::AutoScaling::AutoScalingGroup:
+    VpcZoneIdentifier: VPCZoneIdentifier
+  AWS::Route53::RecordSet:
+    Ttl: TTL
+  AWS::SQS::Queue:
+    DeadLetterTargetArn: deadLetterTargetArn
+    MaxReceiveCount: maxReceiveCount
+  AWS::RDS::DBSubnetGroup:
+    DbSubnetGroupDescription: DBSubnetGroupDescription
+    DbSubnetGroupName: DBSubnetGroupName
 passthrough_parent_keys:
 - Fn::Sub # https://amzn.to/2HKwxri
 - ResponseParameters # API Gateway MethodResponse https://amzn.to/2HKw0Wk
