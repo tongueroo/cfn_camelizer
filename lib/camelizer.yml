@@ -6,7 +6,7 @@ special_keys:
 resource_keys: # specific to resource types
   AWS::CloudFormation::Stack:
     TemplateUrl: TemplateURL
-  AWS::ApplicationAutoScaling::ScalableTarget
+  AWS::ApplicationAutoScaling::ScalableTarget:
     RoleArn: RoleARN
   AWS::AutoScaling::LifecycleHook:
     RoleArn: RoleARN
