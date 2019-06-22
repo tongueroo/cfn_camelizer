@@ -4,23 +4,29 @@ special_keys:
 # Very fine grain control, since these map rules are scoped to specific resources
 # After the special_keys map for backwards compatibility.
 resource_keys: # specific to resource types
-  AWS::CloudFormation::Stack:
-    TemplateUrl: TemplateURL
+  AWS::AutoScaling::AutoScalingGroup:
+    ServiceLinkedRoleArn: ServiceLinkedRoleARN
+    TargetGroupArns: TargetGroupARNs
+    VpcZoneIdentifier: VPCZoneIdentifier
+  AutoScaling::LaunchConfiguration:
+    ClassicLinkVpcId: ClassicLinkVPCId
+    ClassicLinkVpcSecurityGroups: ClassicLinkVPCSecurityGroups
+  AWS::AutoScaling::LifecycleHook:
+    NotificationTargetArn: NotificationTargetARN
+    RoleArn: RoleARN
   AWS::ApplicationAutoScaling::ScalableTarget:
     RoleArn: RoleARN
-  AWS::AutoScaling::LifecycleHook:
-    RoleArn: RoleARN
-    NotificationTargetArn: NotificationTargetARN
-  AWS::AutoScaling::AutoScalingGroup:
-    VpcZoneIdentifier: VPCZoneIdentifier
+  AWS::CloudFormation::Stack:
+    NotificationArns: NotificationARNs
+    TemplateUrl: TemplateURL
   AWS::Route53::RecordSet:
     Ttl: TTL
-  AWS::SQS::Queue:
-    DeadLetterTargetArn: deadLetterTargetArn
-    MaxReceiveCount: maxReceiveCount
   AWS::RDS::DBSubnetGroup:
     DbSubnetGroupDescription: DBSubnetGroupDescription
     DbSubnetGroupName: DBSubnetGroupName
+  AWS::SQS::Queue:
+    DeadLetterTargetArn: deadLetterTargetArn # under RedrivePolicy
+    MaxReceiveCount: maxReceiveCount # under RedrivePolicy
 passthrough_parent_keys:
 - Fn::Sub # https://amzn.to/2HKwxri
 - ResponseParameters # API Gateway MethodResponse https://amzn.to/2HKw0Wk
