@@ -4,21 +4,20 @@ special_keys:
 # Very fine grain control, since these map rules are scoped to specific resources
 # After the special_keys map for backwards compatibility.
 resource_keys: # specific to resource types
+  AWS::ApplicationAutoScaling::ScalableTarget:
+    RoleArn: RoleARN
   AWS::AutoScaling::AutoScalingGroup:
     ServiceLinkedRoleArn: ServiceLinkedRoleARN
     TargetGroupArns: TargetGroupARNs
     VpcZoneIdentifier: VPCZoneIdentifier
-  AutoScaling::LaunchConfiguration:
-    ClassicLinkVpcId: ClassicLinkVPCId
-    ClassicLinkVpcSecurityGroups: ClassicLinkVPCSecurityGroups
   AWS::AutoScaling::LifecycleHook:
     NotificationTargetArn: NotificationTargetARN
-    RoleArn: RoleARN
-  AWS::ApplicationAutoScaling::ScalableTarget:
     RoleArn: RoleARN
   AWS::CloudFormation::Stack:
     NotificationArns: NotificationARNs
     TemplateUrl: TemplateURL
+  AWS::Events::Rule:
+    RoleARN: RoleArn
   AWS::Route53::RecordSet:
     Ttl: TTL
   AWS::RDS::DBSubnetGroup:
@@ -27,6 +26,9 @@ resource_keys: # specific to resource types
   AWS::SQS::Queue:
     DeadLetterTargetArn: deadLetterTargetArn # under RedrivePolicy
     MaxReceiveCount: maxReceiveCount # under RedrivePolicy
+  AutoScaling::LaunchConfiguration:
+    ClassicLinkVpcId: ClassicLinkVPCId
+    ClassicLinkVpcSecurityGroups: ClassicLinkVPCSecurityGroups
 passthrough_parent_keys:
 - Fn::Sub # https://amzn.to/2HKwxri
 - ResponseParameters # API Gateway MethodResponse https://amzn.to/2HKw0Wk
