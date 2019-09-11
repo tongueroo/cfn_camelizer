@@ -3,6 +3,9 @@
 All notable changes to this project will be documented in this file.
 This project *tries* to adhere to [Semantic Versioning](http://semver.org/), even before v1.0.
 
+## [0.4.0]
+- add AWS::ApiGateway::Authorizer cases
+
 ## [0.3.0]
 - camelizer.yml: scope camelizing rules more finely with resource_keys rule
 - add NotificationTargetARN
