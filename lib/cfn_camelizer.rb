@@ -5,6 +5,8 @@ require "rainbow/ext/string"
 require "active_support/core_ext/string"
 require "active_support/core_ext/hash"
 
+# Custom Camelizer with CloudFormation specific handling.
+# Based on: https://stackoverflow.com/questions/8706930/converting-nested-hash-keys-from-camelcase-to-snake-case-in-ruby
 class CfnCamelizer
   class << self
     extend Memoist

@@ -56,11 +56,18 @@ RSpec.describe CfnCamelizer do
     expect(result).to eq("FooBar"=>1, "has-dash"=>2,"has/slash"=>3,"application/json"=>4)
   end
 
-  it "special map keys" do
-    h = {template_url: 1, ttl: 60}
+  it "special map keys cloudformation stack" do
+    h = {type: "AWS::CloudFormation::Stack", properties: {template_url: 1}}
     result = camelizer.transform(h)
     # pp result
-    expect(result).to eq("TemplateURL"=>1, "TTL"=> 60)
+    expect(result).to eq({"Type" => "AWS::CloudFormation::Stack", "Properties" => {"TemplateURL"=>1}})
+  end
+
+  it "special map keys cloudformation stack" do
+    h = {type: "AWS::Route53::RecordSet", properties: {ttl: 60}}
+    result = camelizer.transform(h)
+    # pp result
+    expect(result).to eq({"Type" => "AWS::Route53::RecordSet", "Properties" => {"TTL"=>60}})
   end
 
   it "role_arn property under AWS::Events::Rule type maintains normal RoleArn camelization" do

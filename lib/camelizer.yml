@@ -4,6 +4,8 @@ special_keys:
 # Very fine grain control, since these map rules are scoped to specific resources
 # After the special_keys map for backwards compatibility.
 resource_keys: # specific to resource types
+  AWS::ApiGateway::Authorizer:
+    ProviderArns: ProviderARNs
   AWS::ApplicationAutoScaling::ScalableTarget:
     RoleArn: RoleARN
   AWS::AutoScaling::AutoScalingGroup:
