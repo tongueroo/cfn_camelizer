@@ -16,8 +16,8 @@ class CfnCamelizer
       when Array
         value.map { |v| transform(v, parent_keys, resource_type) }
       when Hash
-        if value.keys.include?(:type)
-          resource_type ||= value[:type]
+        if value.keys.include?(:type) || value.keys.include?("Type")
+          resource_type ||= value[:type] || value["Type"]
         end
 
         initializer = value.map do |k, v|

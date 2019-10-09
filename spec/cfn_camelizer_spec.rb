@@ -83,4 +83,30 @@ RSpec.describe CfnCamelizer do
     # pp result
     expect(result).to eq({"EventsRule"=>{"Type"=>"AWS::Events::Rule", "Properties"=>{"RoleArn"=>"some.arn"}}})
   end
+
+  it "AWS::SQS::Queue type symbol" do
+    h = {
+      type: "AWS::SQS::Queue",
+      properties: {
+        redrive_policy: {
+          max_receive_count: 3
+        }
+      }
+    }
+    result = camelizer.transform(h)
+    expect(result).to eq({"Type"=>"AWS::SQS::Queue", "Properties"=>{"RedrivePolicy"=>{"maxReceiveCount"=>3}}})
+  end
+
+  it "AWS::SQS::Queue Type string" do
+    h = {
+      "Type" => "AWS::SQS::Queue",
+      "Properties" => {
+        "RedrivePolicy" => {
+          "maxReceiveCount" => 3
+        }
+      }
+    }
+    result = camelizer.transform(h)
+    expect(result).to eq({"Type"=>"AWS::SQS::Queue", "Properties"=>{"RedrivePolicy"=>{"maxReceiveCount"=>3}}})
+  end
 end
