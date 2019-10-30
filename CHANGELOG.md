@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 This project *tries* to adhere to [Semantic Versioning](http://semver.org/), even before v1.0.
 
+## [0.4.2]
+- add AWS::CloudFormation::Init to passthrough keys
+- pass through keys with period in them
+
 ## [0.4.1]
 - respect resource_keys special handling with Type string as well as :type symbol
 
