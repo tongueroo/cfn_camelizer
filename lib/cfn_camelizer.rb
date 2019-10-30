@@ -49,7 +49,7 @@ class CfnCamelizer
       # Do not transform keys under certain parent keys or keys that contain - or /
       passthrough = camelizer_yaml["passthrough_parent_keys"]
       intersection = parent_keys & passthrough
-      !intersection.empty? || k.include?('-') || k.include?('/')
+      !intersection.empty? || k.include?('-') || k.include?('/') || k.include?('.')
     end
 
     def camelize(value, resource_type=nil)

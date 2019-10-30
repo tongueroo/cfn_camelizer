@@ -56,6 +56,13 @@ RSpec.describe CfnCamelizer do
     expect(result).to eq("FooBar"=>1, "has-dash"=>2,"has/slash"=>3,"application/json"=>4)
   end
 
+  it "dont touch anything with ." do
+    h = {foo_bar: 1, "has.period": 2}
+    result = camelizer.transform(h)
+    # pp result
+    expect(result).to eq("FooBar"=>1, "has.period"=>2)
+  end
+
   it "special map keys cloudformation stack" do
     h = {type: "AWS::CloudFormation::Stack", properties: {template_url: 1}}
     result = camelizer.transform(h)
