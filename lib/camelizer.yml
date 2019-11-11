@@ -22,6 +22,21 @@ resource_keys: # specific to resource types
     RoleARN: RoleArn
   AWS::Route53::RecordSet:
     Ttl: TTL
+  AWS::RDS::DBInstance:
+    DbClusterIdentifier: DBClusterIdentifier
+    DbInstanceClass: DBInstanceClass
+    DbInstanceIdentifier: DBInstanceIdentifier
+    DbName: DBName
+    DbParameterGroupName: DBParameterGroupName
+    DbSecurityGroups: DBSecurityGroups
+    DbSnapshotIdentifier: DBSnapshotIdentifier
+    DbSubnetGroupName: DBSubnetGroupName
+    DomainIamRoleName: DomainIAMRoleName
+    EnableIamDatabaseAuthentication: EnableIAMDatabaseAuthentication
+    MultiAz: MultiAZ
+    PerformanceInsightsKmsKeyId: PerformanceInsightsKMSKeyId
+    SourceDbInstanceIdentifier: SourceDBInstanceIdentifier
+    VpcSecurityGroups: VPCSecurityGroups
   AWS::RDS::DBSubnetGroup:
     DbSubnetGroupDescription: DBSubnetGroupDescription
     DbSubnetGroupName: DBSubnetGroupName
