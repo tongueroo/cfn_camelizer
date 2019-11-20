@@ -1,5 +1,7 @@
 # CfnCamelizer
 
+[![BoltOps Badge](https://img.boltops.com/boltops/badges/boltops-badge.png)](https://www.boltops.com)
+
 Camelizer for CloudFormation.
 
 ## Installation
