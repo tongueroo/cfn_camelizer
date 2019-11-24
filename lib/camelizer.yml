@@ -22,6 +22,12 @@ resource_keys: # specific to resource types
     RoleARN: RoleArn
   AWS::Route53::RecordSet:
     Ttl: TTL
+  AWS::RDS::DBCluster:
+    DbClusterIdentifier: DBClusterIdentifier
+    DbClusterParameterGroupName: DBClusterParameterGroupName
+    DbSubnetGroupName: DBSubnetGroupName
+    EnableIamDatabaseAuthentication: EnableIAMDatabaseAuthentication
+    SourceDbClusterIdentifier: SourceDBClusterIdentifier
   AWS::RDS::DBInstance:
     DbClusterIdentifier: DBClusterIdentifier
     DbInstanceClass: DBInstanceClass
