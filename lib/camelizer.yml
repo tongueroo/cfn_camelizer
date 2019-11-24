@@ -52,8 +52,11 @@ resource_keys: # specific to resource types
   AutoScaling::LaunchConfiguration:
     ClassicLinkVpcId: ClassicLinkVPCId
     ClassicLinkVpcSecurityGroups: ClassicLinkVPCSecurityGroups
+  AWS::S3::Bucket:
+    SseAlgorithm: SSEAlgorithm
 passthrough_parent_keys:
 - AWS::CloudFormation::Init # configSets https://amzn.to/33iPI2Y
 - Fn::Sub # https://amzn.to/2HKwxri
 - ResponseParameters # API Gateway MethodResponse https://amzn.to/2HKw0Wk
 - Variables # Lambda Environment Variables https://amzn.to/2HLlttV
+- Parameters # AWS::RDS::DBClusterParameterGroup Parameters property
