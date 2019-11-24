@@ -53,6 +53,7 @@ resource_keys: # specific to resource types
     ClassicLinkVpcId: ClassicLinkVPCId
     ClassicLinkVpcSecurityGroups: ClassicLinkVPCSecurityGroups
   AWS::S3::Bucket:
+    KmsMasterKeyID: KMSMasterKeyID
     SseAlgorithm: SSEAlgorithm
 passthrough_parent_keys:
 - AWS::CloudFormation::Init # configSets https://amzn.to/33iPI2Y
