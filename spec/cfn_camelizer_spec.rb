@@ -113,4 +113,37 @@ RSpec.describe CfnCamelizer do
     result = camelizer.transform(h)
     expect(result).to eq({"Type"=>"AWS::SQS::Queue", "Properties"=>{"RedrivePolicy"=>{"maxReceiveCount"=>3}}})
   end
+
+  it "always transform top-level parameters" do
+    h = {"Parameters"=>
+        {"InstanceType"=>{"Default"=>"t3.micro", "Type"=>"String"},
+         "Subnet"=>
+          {"default"=>"", "description"=>"Example: subnet-111", "Type"=>"String"},
+         "Vpc"=>
+          {"default"=>"", "description"=>"Example: vpc-111", "Type"=>"String"}}}
+    result = camelizer.transform(h)
+    expect(result).to eq({"Parameters"=>
+      {"InstanceType"=>{"Default"=>"t3.micro", "Type"=>"String"},
+       "Subnet"=>
+        {"Default"=>"", "Description"=>"Example: subnet-111", "Type"=>"String"},
+       "Vpc"=>
+        {"Default"=>"", "Description"=>"Example: vpc-111", "Type"=>"String"}}})
+  end
+
+  it "DBClusterParameterGroup" do
+    text =<<~EOL
+      ---
+      RDSDBClusterParameterGroup:
+        Properties:
+          Description: A sample parameter group
+          Family: aurora5.6
+          Parameters:
+            character_set_database: utf32
+        Type: AWS::RDS::DBClusterParameterGroup
+    EOL
+    h = YAML.load(text)
+    result = camelizer.transform(h)
+    converted = YAML.dump(result)
+    expect(converted).to eq text
+  end
 end

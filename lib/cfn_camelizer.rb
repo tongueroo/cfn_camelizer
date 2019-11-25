@@ -49,6 +49,8 @@ class CfnCamelizer
       # Do not transform keys under certain parent keys or keys that contain - or /
       passthrough = camelizer_yaml["passthrough_parent_keys"]
       intersection = parent_keys & passthrough
+      top_level_parameters = parent_keys.first == "Parameters"
+      return false if top_level_parameters
       !intersection.empty? || k.include?('-') || k.include?('/') || k.include?('.')
     end
 
