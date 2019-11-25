@@ -146,4 +146,32 @@ RSpec.describe CfnCamelizer do
     converted = YAML.dump(result)
     expect(converted).to eq text
   end
+
+  it "DBClusterIdentifier" do
+    text =<<~EOL
+      RdsCluster:
+        Type: AWS::RDS::DBCluster
+        Properties:
+          DbClusterIdentifier:
+            Fn::If:
+            - HasDbClusterIdentifier
+            - Ref: DbClusterIdentifier
+            - Ref: AWS::NoValue
+    text
+    EOL
+    h = YAML.load(text)
+    result = camelizer.transform(h)
+    converted = YAML.dump(result)
+    expect(converted).to eq(<<~EOL)
+      ---
+      RdsCluster:
+        Type: AWS::RDS::DBCluster
+        Properties:
+          DBClusterIdentifier:
+            Fn::If:
+            - HasDbClusterIdentifier
+            - Ref: DbClusterIdentifier
+            - Ref: AWS::NoValue
+    EOL
+  end
 end
