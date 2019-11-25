@@ -16,8 +16,9 @@ class CfnCamelizer
       when Array
         value.map { |v| transform(v, parent_keys, resource_type) }
       when Hash
-        if value.keys.include?(:type) || value.keys.include?("Type")
-          resource_type ||= value[:type] || value["Type"]
+        camelized_copy = value.dup.deep_transform_keys { |k| k.to_s.camelize }
+        if camelized_copy.keys.include?("Type")
+          resource_type ||= camelized_copy["Type"]
         end
 
         initializer = value.map do |k, v|
