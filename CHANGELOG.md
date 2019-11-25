@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 This project *tries* to adhere to [Semantic Versioning](http://semver.org/), even before v1.0.
 
+## [0.4.8]
+- add DBClusterIdentifier spec
+- resource_keys: allow resource to work with type or Type
+
 ## [0.4.7]
 - fix for parameters
 
