@@ -3,6 +3,9 @@
 All notable changes to this project will be documented in this file.
 This project *tries* to adhere to [Semantic Versioning](http://semver.org/), even before v1.0.
 
+## [0.5.0] - 2023-12-20
+- add Tags to passthrough keys
+
 ## [0.4.9]
 - add Route53 DNSName rule
 
