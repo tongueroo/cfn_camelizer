@@ -63,5 +63,3 @@ passthrough_parent_keys:
 - ResponseParameters # API Gateway MethodResponse https://amzn.to/2HKw0Wk
 - Tags
 - Variables # Lambda Environment Variables https://amzn.to/2HLlttV
-- Environment
-
